@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shop_mart/home_page.dart';
 
-void main(){
+void main() {
   runApp(ShopMart());
 }
 
@@ -10,13 +11,7 @@ class ShopMart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Material(
-        child: Center(
-          child: Container(
-            child: Text("Welcome to Rama Shop Mart..!!"),
-          ),
-        ),
-      ),
+      home: HomePage(),
     );
   }
 }
