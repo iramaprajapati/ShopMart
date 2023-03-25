@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_mart/pages/home_page.dart';
 import 'package:shop_mart/pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shop_mart/utilities/routes.dart';
 
 void main() {
   runApp(ShopMart());
@@ -13,6 +14,7 @@ class ShopMart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
@@ -22,8 +24,8 @@ class ShopMart extends StatelessWidget {
       initialRoute: "/LoginPage",
       routes: {
         "/": (context) => LoginPage(),
-        "/HomePage": (context) => HomePage(),
-        "/LoginPage": (context) => LoginPage(),
+        MyRoutes.homeRoute: (context) => HomePage(),
+        MyRoutes.loginRoute: (context) => LoginPage(),
       },
     );
   }
