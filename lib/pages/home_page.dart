@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_mart/widgets/drawer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,7 +19,7 @@ class HomePage extends StatelessWidget {
               "Welcome to $name Shop Mart..!! \n Offer available on $days days.."),
         ),
       ),
-      drawer: Drawer(),
+      drawer: const MyDrawer(),
     );
   }
 }

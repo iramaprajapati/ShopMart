@@ -21,7 +21,7 @@ class ShopMart extends StatelessWidget {
         fontFamily: GoogleFonts.lato().fontFamily,
       ),
       darkTheme: ThemeData(brightness: Brightness.dark),
-      initialRoute: "/LoginPage",
+      initialRoute: MyRoutes.homeRoute,
       routes: {
         "/": (context) => LoginPage(),
         MyRoutes.homeRoute: (context) => HomePage(),
