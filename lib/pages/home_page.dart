@@ -45,13 +45,49 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16.0),
         child: (ShopProductsModel.products != null &&
                 ShopProductsModel.products!.isNotEmpty)
-            ? ListView.builder(
+            ? /*ListView.builder(
                 itemCount: ShopProductsModel.products!.length,
                 itemBuilder: (context, index) {
                   return ProductWidget(
                     products: ShopProductsModel.products![index],
                   );
                 },
+              )*/
+            GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                ),
+                itemBuilder: (context, index) {
+                  final product = ShopProductsModel.products![index];
+                  return Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: GridTile(
+                      header: Container(
+                        child: Text(
+                          product.name,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(color: Colors.deepPurple),
+                      ),
+                      footer: Container(
+                        child: Text(
+                          "\$${product.price.toString()}",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(color: Colors.blueGrey),
+                      ),
+                      child: Image.network(product.image),
+                    ),
+                  );
+                },
+                itemCount: ShopProductsModel.products!.length,
               )
             : Center(
                 child: CircularProgressIndicator(),
