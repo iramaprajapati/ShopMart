@@ -10,9 +10,9 @@ class ProductWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        onTap: () {
-          print("${products.name} is clicked..!");
-        },
+        //   onTap: () {
+        //     print("${products.name} is clicked..!");
+        //   },
         leading: Image.network(products.image),
         title: Text(products.name),
         subtitle: Text(products.desc),

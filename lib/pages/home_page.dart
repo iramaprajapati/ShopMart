@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void loadData() async {
+    await Future.delayed(Duration(seconds: 2));
     final shop_productJson =
         await rootBundle.loadString("assets/files/shop_products.json");
     final decodedData = jsonDecode(shop_productJson);
@@ -42,14 +43,19 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView.builder(
-          itemCount: ShopProductsModel.products.length,
-          itemBuilder: (context, index) {
-            return ProductWidget(
-              products: ShopProductsModel.products[index],
-            );
-          },
-        ),
+        child: (ShopProductsModel.products != null &&
+                ShopProductsModel.products!.isNotEmpty)
+            ? ListView.builder(
+                itemCount: ShopProductsModel.products!.length,
+                itemBuilder: (context, index) {
+                  return ProductWidget(
+                    products: ShopProductsModel.products![index],
+                  );
+                },
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
       drawer: const MyDrawer(),
     );
