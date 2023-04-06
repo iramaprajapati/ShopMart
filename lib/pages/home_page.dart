@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shop_mart/models/shop_product.dart';
-import 'package:shop_mart/widgets/drawer.dart';
 import 'package:shop_mart/widgets/product_widget.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,62 +38,110 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Shop Mart"),
+      body: SafeArea(
+        child: Container(
+          padding: Vx.m32,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ShopMartHeader(),
+              if (ShopProductsModel.products != null &&
+                  ShopProductsModel.products!.isNotEmpty)
+                ShopProductsList().expand()
+              else
+                Center(
+                  child: CircularProgressIndicator(),
+                )
+            ],
+          ),
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: (ShopProductsModel.products != null &&
-                ShopProductsModel.products!.isNotEmpty)
-            ? /*ListView.builder(
-                itemCount: ShopProductsModel.products!.length,
-                itemBuilder: (context, index) {
-                  return ProductWidget(
-                    products: ShopProductsModel.products![index],
-                  );
-                },
-              )*/
-            GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                ),
-                itemBuilder: (context, index) {
-                  final product = ShopProductsModel.products![index];
-                  return Card(
-                    clipBehavior: Clip.antiAlias,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: GridTile(
-                      header: Container(
-                        child: Text(
-                          product.name,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(color: Colors.deepPurple),
-                      ),
-                      footer: Container(
-                        child: Text(
-                          "\$${product.price.toString()}",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(color: Colors.blueGrey),
-                      ),
-                      child: Image.network(product.image),
-                    ),
-                  );
-                },
-                itemCount: ShopProductsModel.products!.length,
-              )
-            : Center(
-                child: CircularProgressIndicator(),
-              ),
-      ),
-      drawer: const MyDrawer(),
     );
+  }
+}
+
+class ShopMartHeader extends StatelessWidget {
+  const ShopMartHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        "Shop Mart".text.xl5.bold.color(Colors.blue).make(),
+        "Trending Products".text.xl.make(),
+      ],
+    );
+  }
+}
+
+class ShopProductsList extends StatelessWidget {
+  const ShopProductsList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: ShopProductsModel.products!.length,
+      itemBuilder: (context, index) {
+        final products = ShopProductsModel.products![index];
+        return ProductsList(catalog: products);
+      },
+    );
+  }
+}
+
+class ProductsList extends StatelessWidget {
+  final ShopProducts catalog;
+  const ProductsList({Key? key, required this.catalog}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return VxBox(
+        child: Row(
+      children: [
+        CatalogImage(image: catalog.image),
+        Expanded(
+            child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              catalog.name.text.xl.color(Colors.deepPurple).bold.make(),
+              catalog.desc.text.textStyle(context.captionStyle).make(),
+              2.heightBox,
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  "\$${catalog.price}".text.bold.xl.make(),
+                  ElevatedButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(StadiumBorder())),
+                      child: "Buy".text.make())
+                ],
+              )
+            ],
+          ),
+        ))
+      ],
+    )).gray100.rounded.square(140).make().py16();
+  }
+}
+
+class CatalogImage extends StatelessWidget {
+  final String image;
+  const CatalogImage({super.key, required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.network(image)
+        .box
+        .rounded
+        .p8
+        .color(Colors.white)
+        .make()
+        .p16()
+        .w40(context);
   }
 }
