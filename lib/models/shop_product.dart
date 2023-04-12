@@ -3,6 +3,13 @@ import 'dart:convert';
 
 class ShopProductsModel {
   static List<ShopProducts>? products;
+
+  // Get Shop Products by ID
+  ShopProducts getById(int id) =>
+      // ignore: null_closures
+      products!.firstWhere((element) => element.id == id, orElse: null);
+
+  ShopProducts getByPosition(int pos) => products![pos];
 }
 
 class ShopProducts {

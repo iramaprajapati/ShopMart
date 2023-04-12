@@ -51,13 +51,14 @@ class ProductsList extends StatelessWidget {
               2.heightBox,
               ButtonBar(
                 alignment: MainAxisAlignment.spaceBetween,
+                buttonPadding: EdgeInsets.zero,
                 children: [
                   "\$${catalog.price}".text.bold.xl.make(),
                   ElevatedButton(
                       onPressed: () {},
                       style: ButtonStyle(
                           shape: MaterialStateProperty.all(StadiumBorder())),
-                      child: "Buy".text.make())
+                      child: "Add to Cart".text.make())
                 ],
               )
             ],

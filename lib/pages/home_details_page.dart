@@ -21,8 +21,8 @@ class HomeDetailsPage extends StatelessWidget {
               onPressed: () {},
               style: ButtonStyle(
                   shape: MaterialStateProperty.all(StadiumBorder())),
-              child: "Buy".text.xl2.make(),
-            ).wh(100, 50)
+              child: "Add to Cart".text.xl2.make(),
+            ).wh(150, 50)
           ],
         ),
       ),
@@ -41,18 +41,26 @@ class HomeDetailsPage extends StatelessWidget {
                 child: Container(
                   color: Colors.grey[200],
                   width: context.screenWidth,
-                  child: Column(
-                    children: [
-                      catalog.name.text.xl4
-                          .color(Colors.deepPurple)
-                          .bold
-                          .make(),
-                      5.heightBox,
-                      catalog.desc.text.xl
-                          .textStyle(context.captionStyle)
-                          .make(),
-                    ],
-                  ).py64(),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        catalog.name.text.xl4
+                            .color(Colors.deepPurple)
+                            .bold
+                            .make(),
+                        5.heightBox,
+                        catalog.desc.text.xl
+                            .textStyle(context.captionStyle)
+                            .make(),
+                        "Sed erat eos et erat rebum labore, sed aliquyam stet sanctus sed ea lorem duo ipsum, ipsum ipsum sadipscing et tempor, invidunt dolor consetetur ut est takimata, elitr dolor ipsum sit ipsum invidunt eirmod et et. No duo amet aliquyam ut, ea et sed gubergren no kasd kasd sit sit."
+                            .text
+                            .xl
+                            .textStyle(context.captionStyle)
+                            .make()
+                            .p16()
+                      ],
+                    ).py64(),
+                  ),
                 ),
               ),
             )
