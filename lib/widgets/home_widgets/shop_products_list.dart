@@ -4,6 +4,8 @@ import 'package:shop_mart/pages/home_details_page.dart';
 import 'package:shop_mart/widgets/home_widgets/catalog_image.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import 'add_to_cart.dart';
+
 class ShopProductsList extends StatelessWidget {
   const ShopProductsList({super.key});
 
@@ -54,11 +56,9 @@ class ProductsList extends StatelessWidget {
                 buttonPadding: EdgeInsets.zero,
                 children: [
                   "\$${catalog.price}".text.bold.xl.make(),
-                  ElevatedButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all(StadiumBorder())),
-                      child: "Add to Cart".text.make())
+                  AddToCart(
+                    catalog: catalog,
+                  )
                 ],
               )
             ],

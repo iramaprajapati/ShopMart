@@ -2,6 +2,10 @@
 import 'dart:convert';
 
 class ShopProductsModel {
+  static final shop_productsModel = ShopProductsModel._internal();
+  ShopProductsModel._internal();
+  factory ShopProductsModel() => shop_productsModel;
+
   static List<ShopProducts>? products;
 
   // Get Shop Products by ID
