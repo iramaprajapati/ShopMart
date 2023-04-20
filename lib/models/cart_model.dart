@@ -1,10 +1,8 @@
+import 'package:shop_mart/core/store.dart';
 import 'package:shop_mart/models/shop_product.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class CartModel {
-  static final cartModel = CartModel._internal();
-  CartModel._internal();
-  factory CartModel() => cartModel;
-
 // Shop Products Model field.
   late ShopProductsModel _products;
 //Collection of products IDs.
@@ -27,11 +25,22 @@ class CartModel {
   num get totalPrice =>
       products.fold(0, (total, current) => total + current.price);
 
-  void add(ShopProducts item) {
-    _productIds.add(item.id);
-  }
+  // void add(ShopProducts item) {
+  //   _productIds.add(item.id);
+  // }
 
   void remove(ShopProducts item) {
     _productIds.remove(item.id);
+  }
+}
+
+class AddMutation extends VxMutation<MyStore> {
+  final ShopProducts item;
+
+  AddMutation(this.item);
+
+  @override
+  perform() {
+    store!.cart._productIds.add(item.id);
   }
 }
