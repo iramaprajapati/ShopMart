@@ -29,9 +29,9 @@ class CartModel {
   //   _productIds.add(item.id);
   // }
 
-  void remove(ShopProducts item) {
-    _productIds.remove(item.id);
-  }
+  // void remove(ShopProducts item) {
+  //   _productIds.remove(item.id);
+  // }
 }
 
 class AddMutation extends VxMutation<MyStore> {
@@ -42,5 +42,16 @@ class AddMutation extends VxMutation<MyStore> {
   @override
   perform() {
     store!.cart._productIds.add(item.id);
+  }
+}
+
+class RemoveMutation extends VxMutation<MyStore> {
+  final ShopProducts item;
+
+  RemoveMutation(this.item);
+
+  @override
+  perform() {
+    store!.cart._productIds.remove(item.id);
   }
 }
