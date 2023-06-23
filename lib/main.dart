@@ -7,7 +7,7 @@ import 'package:shop_mart/utilities/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 void main() {
-  runApp(VxState(store: MyStore(), child: ShopMart()));
+  runApp(VxState(store: MyStore(), child: const ShopMart()));
 }
 
 class ShopMart extends StatelessWidget {
@@ -18,12 +18,12 @@ class ShopMart extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
-      initialRoute: MyRoutes.homeRoute,
+      initialRoute: MyRoutes.loginRoute,
       routes: {
-        "/": (context) => LoginPage(),
-        MyRoutes.homeRoute: (context) => HomePage(),
-        MyRoutes.loginRoute: (context) => LoginPage(),
-        MyRoutes.cartPageRoute: (context) => MyCartPage(),
+        "/": (context) => const LoginPage(),
+        MyRoutes.homeRoute: (context) => const HomePage(),
+        MyRoutes.loginRoute: (context) => const LoginPage(),
+        MyRoutes.cartPageRoute: (context) => const MyCartPage(),
       },
     );
   }

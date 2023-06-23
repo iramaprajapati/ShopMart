@@ -15,7 +15,7 @@ class MyCartPage extends StatelessWidget {
       body: Column(
         children: [
           CardList().p32().expand(),
-          Divider(),
+          const Divider(),
           CartTotal(),
         ],
       ),
